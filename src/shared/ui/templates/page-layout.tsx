@@ -20,7 +20,7 @@ import {
   useDisclosure,
 } from '@chakra-ui/react';
 
-import { PagePaths } from '~pages/lib/conts';
+import { PagePaths } from '~pages/lib/const';
 
 import { Footer } from '../footer';
 

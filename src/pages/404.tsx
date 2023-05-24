@@ -3,7 +3,7 @@ import { Button, Flex, Heading, Text, useColorModeValue } from '@chakra-ui/react
 import { Link } from '~shared/ui/link';
 import { PAGE_HEIGHT } from '~shared/ui/templates/consts';
 
-import { PagePaths } from './lib/conts';
+import { PagePaths } from './lib/const';
 
 export const NotFoundPage = () => {
   return (

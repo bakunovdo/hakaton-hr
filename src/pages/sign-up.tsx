@@ -19,7 +19,7 @@ import {
 
 import { Link } from '~shared/ui/link';
 
-import { PagePaths } from './lib/conts';
+import { PagePaths } from './lib/const';
 
 export default function SignupPage() {
   const [showPassword, setShowPassword] = useState(false);
