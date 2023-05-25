@@ -11,6 +11,7 @@ import {
   Flex,
   Icon,
   IconButton,
+  Image,
   Link,
   Menu,
   MenuButton,
@@ -22,7 +23,6 @@ import {
   PopoverTrigger,
   Stack,
   Text,
-  useBreakpointValue,
   useColorModeValue,
   useDisclosure,
 } from '@chakra-ui/react';
@@ -73,16 +73,10 @@ export function PageLayout() {
             variant={'ghost'}
           />
         </Flex>
-        <Flex justify={{ base: 'center', md: 'start' }} flex={{ base: 1 }}>
-          <Text
-            as={LinkRouter}
-            color={useColorModeValue('gray.800', 'white')}
-            fontFamily={'heading'}
-            textAlign={useBreakpointValue({ base: 'center', md: 'left' })}
-            to={PagePaths.HOME}
-          >
-            Logo
-          </Text>
+        <Flex align="center" justify={{ base: 'center', md: 'start' }} flex={{ base: 1 }}>
+          <Box as={LinkRouter} boxSize={12} to={PagePaths.HOME}>
+            <Image alt="logo" src="/assets/logo.png" />
+          </Box>
 
           <Flex display={{ base: 'none', md: 'flex' }} ml={10}>
             <DesktopNav />
