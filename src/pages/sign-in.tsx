@@ -1,3 +1,5 @@
+import { useNavigate } from 'react-router-dom';
+
 import {
   Box,
   Button,
@@ -18,6 +20,12 @@ import { PAGE_HEIGHT } from '~shared/ui/templates/consts';
 import { PagePaths } from './lib/const';
 
 export const SignInPage = () => {
+  const navigate = useNavigate();
+
+  const handleLogin = () => {
+    navigate(PagePaths.DASHBOARD);
+  };
+
   return (
     <Flex
       align={'center'}

@@ -3,6 +3,8 @@ import { Link as LinkRouter } from 'react-router-dom';
 
 import { ChevronDownIcon, ChevronRightIcon, CloseIcon, HamburgerIcon } from '@chakra-ui/icons';
 import {
+  Avatar,
+  Badge,
   Box,
   Button,
   Collapse,
@@ -10,6 +12,11 @@ import {
   Icon,
   IconButton,
   Link,
+  Menu,
+  MenuButton,
+  MenuDivider,
+  MenuItem,
+  MenuList,
   Popover,
   PopoverContent,
   PopoverTrigger,
@@ -19,6 +26,14 @@ import {
   useColorModeValue,
   useDisclosure,
 } from '@chakra-ui/react';
+
+import {
+  AdminCondition,
+  AuthorizedCondition,
+  CandidateCondition,
+  HRCondition,
+  NotAuthorizedCondition,
+} from '~app/providers/auth-provider';
 
 import { PagePaths } from '~pages/lib/const';
 
@@ -74,27 +89,95 @@ export function PageLayout() {
           </Flex>
         </Flex>
 
-        <Stack justify={'flex-end'} direction={'row'} flex={{ base: 1, md: 0 }} spacing={6}>
-          <Button
-            as={LinkRouter}
-            fontSize={'sm'}
-            fontWeight={400}
-            to={PagePaths.SIGN_IN}
-            variant={'link'}
-          >
-            Sign In
-          </Button>
-          <Button
-            as={LinkRouter}
-            display={{ base: 'none', md: 'inline-flex' }}
-            fontSize={'sm'}
-            fontWeight={600}
-            colorScheme="pink"
-            to={PagePaths.SIGN_UP}
-          >
-            Sign Up
-          </Button>
-        </Stack>
+        <AuthorizedCondition>
+          <Stack justify={'flex-end'} direction={'row'} flex={{ base: 1, md: 0 }} spacing={2}>
+            <AdminCondition>
+              <Badge
+                alignItems="center"
+                display="flex"
+                px={3}
+                py={1}
+                lineHeight={1}
+                colorScheme="blue"
+              >
+                ADMIN
+              </Badge>
+            </AdminCondition>
+            <HRCondition>
+              <Badge
+                alignItems="center"
+                display="flex"
+                px={3}
+                py={1}
+                lineHeight={1}
+                colorScheme="pink"
+              >
+                HR
+              </Badge>
+            </HRCondition>
+            <CandidateCondition>
+              <Badge
+                alignItems="center"
+                display="flex"
+                px={3}
+                py={1}
+                lineHeight={1}
+                colorScheme="green"
+              >
+                CANDIDATE
+              </Badge>
+            </CandidateCondition>
+
+            <Flex align={'center'}>
+              <Menu>
+                <MenuButton
+                  as={Button}
+                  minW={0}
+                  cursor={'pointer'}
+                  rounded={'full'}
+                  variant={'link'}
+                >
+                  <Avatar
+                    size={'sm'}
+                    src={
+                      'https://images.unsplash.com/photo-1493666438817-866a91353ca9?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9'
+                    }
+                  />
+                </MenuButton>
+                <MenuList>
+                  <MenuItem>Link 1</MenuItem>
+                  <MenuItem>Link 2</MenuItem>
+                  <MenuDivider />
+                  <MenuItem>Logout</MenuItem>
+                </MenuList>
+              </Menu>
+            </Flex>
+          </Stack>
+        </AuthorizedCondition>
+
+        <NotAuthorizedCondition>
+          <Stack justify={'flex-end'} direction={'row'} flex={{ base: 1, md: 0 }} spacing={6}>
+            <Button
+              as={LinkRouter}
+              fontSize={'sm'}
+              fontWeight={400}
+              to={PagePaths.SIGN_IN}
+              variant={'link'}
+            >
+              Sign In
+            </Button>
+            <Button
+              as={LinkRouter}
+              display={{ base: 'none', md: 'inline-flex' }}
+              fontSize={'sm'}
+              fontWeight={600}
+              colorScheme="pink"
+              to={PagePaths.SIGN_UP}
+            >
+              Sign Up
+            </Button>
+          </Stack>
+        </NotAuthorizedCondition>
       </Flex>
 
       <Collapse animateOpacity in={isOpen}>
